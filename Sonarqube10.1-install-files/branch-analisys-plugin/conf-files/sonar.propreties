@@ -1,0 +1,29 @@
+#DATABASE USER CREDENTIALS AND CONN STRING
+sonar.jdbc.username=<DB_USERNAME>
+sonar.jdbc.password=<DB_PASSWD>
+sonar.jdbc.url=jdbc:sqlserver://<HOST_IP>:1434;instanceName=<INSTANCE_NAME>;databaseName=SONAR;integratedSecurity=false;trustServerCertificate=true
+
+# WEB SERVER
+# Web server is executed in a dedicated Java process. By default heap size is 512MB.
+sonar.web.javaOpts=-Xmx1024m -Xms512m -XX:+HeapDumpOnOutOfMemoryError
+sonar.web.javaAdditionalOpts=-javaagent:/opt/sonarqube/extensions/plugins/sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar=web
+sonar.web.port=8080
+
+# LDAP CONFIGURATION
+sonar.security.realm=LDAP
+ldap.url=LDAP://<LDAP_IP>:<PORT>
+ldap.bindDn=<SERVICE_USERNAME>@example.example
+ldap.bindPassword=<SERVICE_PASSWD>
+ldap.user.baseDn=DC=example,DC=corp
+ldap.user.request=(&(objectClass=user)(sAMAccountName={login}))
+ldap.user.realNameAttribute=cn
+ldap.user.emailAttribute=email
+
+# COMPUTE ENGINE
+# The Compute Engine is responsible for processing background tasks.
+sonar.ce.javaOpts=-Xmx4096m -Xms2048m -XX:+HeapDumpOnOutOfMemoryError
+sonar.ce.javaAdditionalOpts=-javaagent:/opt/sonarqube/extensions/plugins/sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar=ce
+
+# ELASTICSEARCH
+# Elasticsearch is used to facilitate fast and accurate information retrieval.
+sonar.search.javaOpts=-Xmx2048m -Xms2048m -XX:MaxDirectMemorySize=512m -XX:+HeapDumpOnOutOfMemoryError
