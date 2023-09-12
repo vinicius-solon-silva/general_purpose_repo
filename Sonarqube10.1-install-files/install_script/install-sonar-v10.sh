@@ -83,7 +83,7 @@ WantedBy=multi-user.target
 EOT
 
 # CONFIGURA USO DE MEMÓRIA VIRTUAL MAX DA VM
-sudo echo "vm.max_map_count=262144" >> /etc/sysctl.conf
+sudo echo "vm.max_map_count=524288" >> /etc/sysctl.conf
 sudo echo "fs.file-max=65536" >> /etc/sysctl.conf
 
 # INICIA O SONARQUBE E HABILITA PARA INICIAR PÓS REBOOT
