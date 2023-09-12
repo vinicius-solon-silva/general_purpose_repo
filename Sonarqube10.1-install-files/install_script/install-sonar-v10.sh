@@ -4,6 +4,7 @@
 DB_USER=username
 DB_PASSWD=passwd
 DB_IP_HOST=host_ip
+DB_PORT=port
 DB_INSTANCE=instance_name
 
 # CREDENCIAIS DO LDAP
@@ -42,7 +43,7 @@ sudo mv sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar /opt/sonarqube/ext
 # INSERE VARS DE CONFIG NO SONAR.PROPERTIES
 sudo echo "sonar.jdbc.username=$DB_USER" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.jdbc.password=$DB_PASSWD" >> /opt/sonarqube/conf/sonar.properties
-sudo echo "sonar.jdbc.url=jdbc:sqlserver://$DB_IP_HOST:1434;instanceName=$DB_INSTANCE;databaseName=SONAR;integratedSecurity=false;trustServerCertificate=true" >> /opt/sonarqube/conf/sonar.properties
+sudo echo "sonar.jdbc.url=jdbc:sqlserver://$DB_IP_HOST:$DB_PORT;instanceName=$DB_INSTANCE;databaseName=SONAR;integratedSecurity=false;trustServerCertificate=true" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.web.javaOpts=-Xmx1024m -Xms512m -XX:+HeapDumpOnOutOfMemoryError" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.web.javaAdditionalOpts=-javaagent:/opt/sonarqube/extensions/plugins/sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar=web" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.web.port=8080" >> /opt/sonarqube/conf/sonar.properties
