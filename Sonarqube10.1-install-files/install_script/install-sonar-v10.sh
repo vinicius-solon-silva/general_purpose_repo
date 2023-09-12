@@ -20,12 +20,10 @@ PLUGIN_URL=URL
 
 # CRIA GRUPO E USER SONARQUBE
 sudo mkdir /opt/sonarqube/
-sudo cd /opt/sonarqube/
 sudo addgroup sonarqube
-sudo useradd -M -d /opt/sonarqube/ -r -s /bin/bash sonarqube
-sudo usermod -aG sonarqube sonarqube
-sudo chown -R sonarqube:sonarqube /opt/sonarqube
-sudo chmod -R u+rwx /opt/sonarqube
+sudo adduser sonarqube --ingroup sonarqube
+sudo chown -R sonarqube:sonarqube /opt/sonarqube/
+sudo chmod -R 770 /opt/sonarqube/
 
 # INSTALA PACOTES UTILIZADOS E O SONARQUBE 10.1
 sudo apt update && apt upgrade -y
@@ -34,6 +32,8 @@ sudo ufw allow 8080
 sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.1.0.73491.zip
 sudo unzip sonarqube-*.zip
 sudo mv sonarqube-*/* /opt/sonarqube/
+rm sonarqube-10.1.0.73491.zip
+rm -r sonarqube-10.1.0.73491
 
 # INSTALAR PLUGIN DE ANALISE DE BRANCHES
 sudo wget $PLUGIN_URL
@@ -87,8 +87,8 @@ sudo echo "vm.max_map_count=262144" >> /etc/sysctl.conf
 sudo echo "fs.file-max=65536" >> /etc/sysctl.conf
 
 # INICIA O SONARQUBE E HABILITA PARA INICIAR PÓS REBOOT
-sudo chown -R sonarqube:sonarqube /opt/sonarqube
-sudo chmod -R u+rwx /opt/sonarqube
+sudo chown -R sonarqube:sonarqube /opt/sonarqube/
+sudo chmod -R 770 /opt/sonarqube/
 sudo systemctl daemon-reload
 sudo systemctl restart sonarqube
 sudo systemctl enable sonarqube
