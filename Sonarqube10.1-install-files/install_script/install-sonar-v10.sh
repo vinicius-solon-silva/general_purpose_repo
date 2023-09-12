@@ -85,6 +85,10 @@ EOT
 # CONFIGURA USO DE MEMÓRIA VIRTUAL MAX DA VM
 sudo echo "vm.max_map_count=524288" >> /etc/sysctl.conf
 sudo echo "fs.file-max=65536" >> /etc/sysctl.conf
+sysctl -w vm.max_map_count=524288
+sysctl -w fs.file-max=131072
+ulimit -n 131072
+ulimit -u 8192
 
 # INICIA O SONARQUBE E HABILITA PARA INICIAR PÓS REBOOT
 sudo chown -R sonarqube:sonarqube /opt/sonarqube/
