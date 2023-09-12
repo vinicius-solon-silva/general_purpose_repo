@@ -37,7 +37,7 @@ rm -r sonarqube-10.1.0.73491
 
 # INSTALAR PLUGIN DE ANALISE DE BRANCHES
 sudo wget $PLUGIN_URL
-sudo mv sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar extensions/plugins/
+sudo mv sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar /opt/sonarqube/extensions/plugins/
 
 # INSERE VARS DE CONFIG NO SONAR.PROPERTIES
 sudo echo "sonar.jdbc.username=$DB_USER" >> /opt/sonarqube/conf/sonar.properties
@@ -49,8 +49,8 @@ sudo echo "sonar.web.port=8080" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.ce.javaOpts=-Xmx4096m -Xms2048m -XX:+HeapDumpOnOutOfMemoryError" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.ce.javaAdditionalOpts=-javaagent:/opt/sonarqube/extensions/plugins/sonarqube-community-branch-plugin-1.15.0-SNAPSHOT.jar=ce" >> /opt/sonarqube/conf/sonar.properties
 sudo echo "sonar.search.javaOpts=-Xmx2048m -Xms2048m -XX:MaxDirectMemorySize=512m -XX:+HeapDumpOnOutOfMemoryError" >> /opt/sonarqube/conf/sonar.properties
-sudo echo "sonar.security.realm=LDAP" >> /opt/sonarqube/conf/sonar.properties
 if [[ $ENABLE_LDAP -eq 1 ]]; then
+    sudo echo "sonar.security.realm=LDAP" >> /opt/sonarqube/conf/sonar.properties
     sudo echo "ldap.url=LDAP://$LDAP_IP:$LDAP_PORT" >> /opt/sonarqube/conf/sonar.properties
     sudo echo "ldap.bindDn=$LDAP_USER_EMAIL" >> /opt/sonarqube/conf/sonar.properties
     sudo echo "ldap.bindPassword=$LDAP_PASSWD" >> /opt/sonarqube/conf/sonar.properties
